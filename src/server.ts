@@ -21,6 +21,7 @@ const start = async () => {
          },
       },
    });
+
    app.use(
       "/api/trpc",
       trpcExpress.createExpressMiddleware({
@@ -28,7 +29,9 @@ const start = async () => {
          createContext,
       })
    );
+
    app.use((req, res) => nextHandler(req, res));
+
    nextApp.prepare().then(() => {
       payload.logger.info("Next.js started");
 
