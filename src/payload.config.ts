@@ -3,10 +3,11 @@ import { mongooseAdapter } from "@payloadcms/db-mongodb";
 import { webpackBundler } from "@payloadcms/bundler-webpack";
 import { slateEditor } from "@payloadcms/richtext-slate";
 import path from "path";
+import { Users } from "./collections/Users";
 
 export default buildConfig({
    serverURL: process.env.NEXT_PUBLIC_SERVER_URL || "",
-   collections: [],
+   collections: [Users],
    routes: {
       admin: "/seller",
    },
