@@ -36,7 +36,7 @@ const ProductListing = ({ product, index }: ProductListingProps) => {
             className={cn("invisible h-full w-full cursor-pointer group/main", {
                "visible animate-in fade-in-5": isVisible,
             })}
-            href={`/product/${product.id}`}
+            href={`/products/${product.id}`}
          >
             <div className="flex flex-col w-full">
                <ImageSlider urls={validUrls} />
@@ -54,7 +54,7 @@ const ProductPlaceholder = () => {
    return (
       <div className="flex flex-col w-full">
          <div className="relative bg-zinc-100 aspect-square w-full overflow-hidden rounded-xl">
-            <Skeleton className="w-full h-full " />
+            <Skeleton className="w-full h-full" />
          </div>
          <Skeleton className="mt-4 w-2/3 h-4 rounded-lg" />
          <Skeleton className="mt-2 w-16 h-4 rounded-lg" />
