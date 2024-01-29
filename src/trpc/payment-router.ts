@@ -59,9 +59,11 @@ export const paymentRouter = router({
                cancel_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/cart`,
                payment_method_types: ["card", "paypal"],
                mode: "payment",
-               metadata: {
-                  userId: user.id,
-                  orderId: order.id,
+               payment_intent_data: {
+                  metadata: {
+                     userId: user.id,
+                     orderId: order.id,
+                  },
                },
                line_items,
             });
