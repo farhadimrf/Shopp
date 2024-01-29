@@ -31,12 +31,20 @@ export const paymentRouter = router({
             collection: "orders",
             data: {
                _isPaid: false,
-               products: filteredProducts,
+               products: filteredProducts.map((product) => product.id),
                user: user.id,
             },
          });
 
          const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
+
+         filteredProducts.forEach((product) => {
+            line_items.push({
+               price: product.priceId!,
+               quantity: 1,
+            });
+         });
+
          line_items.push({
             price: "price_1OdVXVJSFaPt3w2rETOWX3B1",
             quantity: 1,
@@ -57,6 +65,10 @@ export const paymentRouter = router({
                },
                line_items,
             });
-         } catch (err) {}
+            return { url: stripeSession.url };
+         } catch (err) {
+            console.log(err);
+            return { url: null };
+         }
       }),
 });
