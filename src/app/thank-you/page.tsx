@@ -1,11 +1,13 @@
 import { getPayLoadClient } from "@/get-payload";
 import { getServerSideUser } from "@/lib/payload-utils";
-import { Product, ProductFile } from "@/payload-types";
+import { Product, ProductFile, User } from "@/payload-types";
 import { cookies } from "next/headers";
 import Image from "next/image";
 import { notFound, redirect } from "next/navigation";
 import { PRODUCT_CATEGORIES } from "@/config";
 import { formatPrice } from "@/lib/utils";
+import Link from "next/link";
+import PaymentStatus from "@/components/PaymentStatus";
 
 type ThankYouPageProps = {
    searchParams: {
@@ -36,6 +38,11 @@ const ThankYouPage = async ({ searchParams }: ThankYouPageProps) => {
    if (orderUserId !== user?.id) {
       return redirect(`/sign-in?origin=thank-you?orderId=${orderId}`);
    }
+
+   const products = order.products as Product[];
+   const orderTotal = products.reduce((total, product) => {
+      return total + product.price;
+   }, 0);
 
    return (
       <main className="relative lg:min-h-full">
@@ -115,6 +122,35 @@ const ThankYouPage = async ({ searchParams }: ThankYouPageProps) => {
                            );
                         })}
                      </ul>
+                     <div className="space-y-6 border-t border-gray-200 pt-6 text-sm font-medium text-muted-foreground">
+                        <div className="flex justify-between">
+                           <p>Subtotal</p>
+                           <p className="text-gray-900">{formatPrice(orderTotal)}</p>
+                        </div>
+
+                        <div className="flex justify-between">
+                           <p>Transaction Fee</p>
+                           <p className="text-gray-900">{formatPrice(1)}</p>
+                        </div>
+
+                        <div className="flex items-center justify-between border-t border-gray-200 pt-6 text-gray-900">
+                           <p className="text-base">Total</p>
+                           <p className="text-base">{formatPrice(orderTotal + 1)}</p>
+                        </div>
+                     </div>
+                     <PaymentStatus
+                        isPaid={order._isPaid}
+                        orderEmail={(order.user as User).email}
+                        orderId={order.id}
+                     />
+                     <div className="mt-16 border-t border-gray-200 py-6 text-right">
+                        <Link
+                           href="/products"
+                           className="text-sm font-medium text-blue-600 hover:text-blue-500"
+                        >
+                           Continue shopping &rarr;
+                        </Link>
+                     </div>
                   </div>
                </div>
             </div>
