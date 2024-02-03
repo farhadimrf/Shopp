@@ -31,7 +31,7 @@ const start = async () => {
       },
    });
 
-   app.post("/api/webhook/stripe", webhookMiddleware, stripeWebhookHandler);
+   app.post("/api/webhooks/stripe", webhookMiddleware, stripeWebhookHandler);
 
    const payload = await getPayLoadClient({
       initOptions: {
