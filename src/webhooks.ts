@@ -9,11 +9,11 @@ import { ReceiptEmailHtml } from "./components/emails/ReceiptEmail";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export const stripeWebhookHandler = async (req: express.Request, res: express.Response) => {
-   // validate that this request actually comes from stripe
-   // update the _isPaid value of this order
-   // send receipt email
+// validate that this request actually comes from stripe
+// update the _isPaid value of this order
+// send receipt email
 
+export const stripeWebhookHandler = async (req: express.Request, res: express.Response) => {
    const webhookRequest = req as any as WebhookRequest;
    const body = webhookRequest.rawBody;
    const signature = req.headers["stripe-signature"] || "";
@@ -65,7 +65,7 @@ export const stripeWebhookHandler = async (req: express.Request, res: express.Re
 
       const [order] = orders;
 
-      if (!user) return res.status(404).json({ error: "No such order exists." });
+      if (!order) return res.status(404).json({ error: "No such order exists." });
 
       await payload.update({
          collection: "orders",
