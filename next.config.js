@@ -1,14 +1,14 @@
-const { hostname } = require("os");
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
    images: {
       remotePatterns: [
          {
-            hostname: "localhost",
-            pathname: "**",
-            port: "3000",
             protocol: "http",
+            hostname: "localhost",
+         },
+         {
+            protocol: "https",
+            hostname: "shop-production-4e2a.up.railway.app/",
          },
       ],
    },
