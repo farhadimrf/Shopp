@@ -59,12 +59,11 @@ export const paymentRouter = router({
                cancel_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/cart`,
                payment_method_types: ["card", "paypal"],
                mode: "payment",
-               payment_intent_data: {
-                  metadata: {
-                     userId: user.id,
-                     orderId: order.id,
-                  },
+               metadata: {
+                  userId: user.id,
+                  orderId: order.id,
                },
+
                line_items,
             });
             return { url: stripeSession.url };
