@@ -50,7 +50,7 @@ function constructMetadata(_a) {
             description: description,
             images: [image],
             creator: "@mr___mrf",
-        }, icons: icons, metadataBase: new URL("https://shop-production-4e2a.up.railway.app/") }, (noIndex && {
+        }, icons: icons, metadataBase: new URL("https://shopp-production.up.railway.app") }, (noIndex && {
         robots: {
             index: false,
             follow: false,

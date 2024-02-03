@@ -57,7 +57,7 @@ export function constructMetadata({
          creator: "@mr___mrf",
       },
       icons,
-      metadataBase: new URL("https://shop-production-4e2a.up.railway.app/"),
+      metadataBase: new URL("https://shopp-production.up.railway.app"),
       ...(noIndex && {
          robots: {
             index: false,
